@@ -1,9 +1,9 @@
 #!/usr/bin/php
-<?PHP
+<?php
 	// This is a simple cron script you can use to track
 	// your location over time. It uses the MySQL schema
 	// pasted below.
-	
+
 	// CREATE TABLE `history` (
 	//   `dt` datetime NOT NULL,
 	//   `lat` decimal(10,6) NOT NULL,
@@ -28,3 +28,5 @@
 		$query = "INSERT INTO history (`dt`, `lat`, `lng`) VALUES ('$dt', '$lat', '$lng')";
 		mysql_query($query, $db) or die(mysql_error());
 	}
+    echo("Location " . $loc['latitude'] . ", " . $loc['longitude'] . " added to Database with accuracy " . $loc['accuracy'] . "\n");
+?>

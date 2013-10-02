@@ -1,6 +1,6 @@
 <?PHP
 	// https://twitter.com/#!/marcoarment/status/59089853433921537
-	date_default_timezone_set('America/Los_Angeles');
+	date_default_timezone_set('Europe/Berlin');
 
 
     // Sosumi - a PHP client for Apple's Find My iPhone web service
@@ -69,7 +69,7 @@
             return $loc;
         }
 
-        public function sendMessage($msg, $alarm = false, $device_num = 0, $subject = 'Important Message')
+        private function sendMessage($msg, $alarm = false, $device_num = 0, $subject = 'Important Message')
         {
             $post = sprintf('{"clientContext":{"appName":"FindMyiPhone","appVersion":"1.4","buildVersion":"145","deviceUDID":"0000000000000000000000000000000000000000","inactiveTime":5911,"osVersion":"3.2","productType":"iPad1,1","selectedDevice":"%s","shouldLocate":false},"device":"%s","serverContext":{"callbackIntervalInMS":3000,"clientId":"0000000000000000000000000000000000000000","deviceLoadStatus":"203","hasDevices":true,"lastSessionExtensionTime":null,"maxDeviceLoadTime":60000,"maxLocatingTime":90000,"preferredLanguage":"en","prefsUpdateTime":1276872996660,"sessionLifespan":900000,"timezone":{"currentOffset":-25200000,"previousOffset":-28800000,"previousTransition":1268560799999,"tzCurrentName":"Pacific Daylight Time","tzName":"America/Los_Angeles"},"validRegion":true},"sound":%s,"subject":"%s","text":"%s","userText":true}',
                                 $this->devices[$device_num]->id, $this->devices[$device_num]->id,
@@ -80,7 +80,7 @@
             $this->iflog('Message sent');
         }
 
-        public function remoteLock($passcode, $device_num = 0)
+        private function remoteLock($passcode, $device_num = 0)
         {
             $post = sprintf('{"clientContext":{"appName":"FindMyiPhone","appVersion":"1.4","buildVersion":"145","deviceUDID":"0000000000000000000000000000000000000000","inactiveTime":5911,"osVersion":"3.2","productType":"iPad1,1","selectedDevice":"%s","shouldLocate":false},"device":"%s","oldPasscode":"","passcode":"%s","serverContext":{"callbackIntervalInMS":3000,"clientId":"0000000000000000000000000000000000000000","deviceLoadStatus":"203","hasDevices":true,"lastSessionExtensionTime":null,"maxDeviceLoadTime":60000,"maxLocatingTime":90000,"preferredLanguage":"en","prefsUpdateTime":1276872996660,"sessionLifespan":900000,"timezone":{"currentOffset":-25200000,"previousOffset":-28800000,"previousTransition":1268560799999,"tzCurrentName":"Pacific Daylight Time","tzName":"America/Los_Angeles"},"validRegion":true}}',
                                 $this->devices[$device_num]->id, $this->devices[$device_num]->id, $passcode);
@@ -91,7 +91,7 @@
         }
 
         // This hasn't been tested (for obvious reasons). Please let me know if it does/doesn't work...
-        public function remoteWipe($device_num = 0)
+        private function remoteWipe($device_num = 0)
         {
             $post = sprintf('{"clientContext":{"appName":"FindMyiPhone","appVersion":"1.4","buildVersion":"145","deviceUDID":"0000000000000000000000000000000000000000","inactiveTime":5911,"osVersion":"3.2","productType":"iPad1,1","selectedDevice":"%s","shouldLocate":false},"device":"%s","oldPasscode":"","passcode":"%s","serverContext":{"callbackIntervalInMS":3000,"clientId":"0000000000000000000000000000000000000000","deviceLoadStatus":"203","hasDevices":true,"lastSessionExtensionTime":null,"maxDeviceLoadTime":60000,"maxLocatingTime":90000,"preferredLanguage":"en","prefsUpdateTime":1276872996660,"sessionLifespan":900000,"timezone":{"currentOffset":-25200000,"previousOffset":-28800000,"previousTransition":1268560799999,"tzCurrentName":"Pacific Daylight Time","tzName":"America/Los_Angeles"},"validRegion":true}}',
                                 $this->devices[$device_num]->id, $this->devices[$device_num]->id, $passcode);
