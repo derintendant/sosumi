@@ -14,20 +14,27 @@ FEATURES
 
  * Retrieve your device's current location and margin of error.
  * Push a custom text message to the device and an optional audible alarm.
+ * Save the location of your device in a database and plot it on a Google Map
 
 INSTALL
 -------
 
 This script requires PHP 5.2 and the JSON extension, which should be included by default. PHP's CURL extension (with SSL support) is also required.
+To use the location recording, you obviously need a MySQL Server. To plot it you need a PHP version with DOM manipulation support.
 
-EXAMPLES
---------
-Two example scripts are included. The first one, `example.php` retrieves your current location and plots it on a Google map. It also allows you to send a push notification message and an optional alarm. The second script, `cron.php`, will grab your location and store it in a MySQL database, allowing you to track your position over time.
+Insert your iCloud and MySQL Credentials in settings.php an run install.php. This will create the required table in the database.
+
+Then create a cronjob to run cron.php in a certain interval (I use 1 hour, as every location request will stress your phone's battery).
+
+index.php then shows the map with your location(s).
+
 
 UPDATES
 -------
 
 Code is hosted at GitHub: [http://github.com/tylerhall/sosumi](http://github.com/tylerhall/sosumi)
+
+My fork: [http://github.com/derintendant/sosumi](http://github.com/derintendant/sosumi)
 
 OTHER LANGUAGES / RELATED PROJECTS
 ----------------------------------

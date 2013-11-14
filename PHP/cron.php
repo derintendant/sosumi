@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 	// This is a simple cron script you can use to track
 	// your location over time. It uses the MySQL schema
@@ -12,14 +11,16 @@
 	// )
 
 	require 'class.sosumi.php';
+	require 'settings.php';
 
-	$ssm = new Sosumi('your_username', 'your_password');
+	$ssm = new Sosumi(ICLOUD_ACCOUNT, ICLOUD_PASSWORD);
+
 	$loc = $ssm->locate();
 
 	if(strlen($loc['latitude']))
 	{
-		$db = mysql_connect('localhost', 'root', '');
-		mysql_select_db('sosumi', $db) or die(mysql_error());
+		$db = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+		mysql_select_db(DB_NAME, $db) or die(mysql_error());
 
 		$dt = date('Y-m-d H:i:s');
 		$lat = mysql_real_escape_string($loc['latitude'], $db);
